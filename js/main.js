@@ -92,7 +92,8 @@ function handleClickNewCatForm(event) {
     }
 }
 //Adicionar nuevo gatito
-function addNewKitten(event) {
+
+/*function addNewKitten(event) {
     event.preventDefault();
     const valueDesc = inputDesc.value;
     const valuePhoto = inputPhoto.value;
@@ -103,7 +104,26 @@ function addNewKitten(event) {
     else if (valueDesc !== "" && valuePhoto !== "" && valueName !== "") {
         labelMessageError.innerHTML = "";
     }
-}
+}   */
+function addNewKitten(event){
+    event.preventDefault();
+    const newKittenDataObject = {
+        image: inputPhoto.value,
+        desc: inputDesc.value,
+        name: inputName.value,
+        race: inputRace.value,
+    }
+    if (newKittenDataObject.desc === "" || newKittenDataObject.image === "" || newKittenDataObject.name === "") {
+        labelMessageError.innerHTML = "¡Uy! parece que has olvidado algo";
+    }
+    else if (newKittenDataObject.desc !== "" && newKittenDataObject.image !== "" && newKittenDataObject.name !== "") {
+        labelMessageError.innerHTML = 'Mola! Un nuevo gatito en Adalab!';
+    } 
+    kittenDataList.push(newKittenDataObject);
+    renderKittenList(kittenDataList);
+  };
+ 
+
 //Cancelar la búsqueda de un gatito
 function cancelNewKitten(event) {
     event.preventDefault();
