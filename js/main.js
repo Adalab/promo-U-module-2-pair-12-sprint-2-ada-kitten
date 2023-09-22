@@ -91,20 +91,7 @@ function handleClickNewCatForm(event) {
         hideNewCatForm();
     }
 }
-//Adicionar nuevo gatito
 
-/*function addNewKitten(event) {
-    event.preventDefault();
-    const valueDesc = inputDesc.value;
-    const valuePhoto = inputPhoto.value;
-    const valueName = inputName.value;
-    if (valueDesc === "" || valuePhoto === "" || valueName === "") {
-        labelMessageError.innerHTML = "¡Uy! parece que has olvidado algo";
-    }
-    else if (valueDesc !== "" && valuePhoto !== "" && valueName !== "") {
-        labelMessageError.innerHTML = "";
-    }
-}   */
 function addNewKitten(event){
     event.preventDefault();
     const newKittenDataObject = {
