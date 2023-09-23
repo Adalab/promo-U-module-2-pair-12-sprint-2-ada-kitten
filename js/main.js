@@ -34,7 +34,7 @@ const kittenData_3 = {
   image: 'https://dev.adalab.es/maine-coon-cat.webp',
   name: 'Sofia',
   desc: ' Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.',
-  race: '',
+  race: 'Maine Coon',
 };
 
 const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
@@ -71,6 +71,51 @@ function renderKittenList(kittenDataList) {
     listElement.innerHTML += renderKitten(kittenItem);
   }
 }
+
+/*SOLUCION YANELIS--- 
+funciona la raza pero no la descripción
+
+https://github.com/Adalab/pw-adakitten/blob/main/02-solucion-sprint-2/js/exercise-per-day-to-review/main-1-12-metodos-funcionales.js
+*/
+
+function filterKitten(event) {
+  event.preventDefault();
+
+  const descrSearchText = input_search_desc.value;
+  const raceSearchText = input_search_race.value;
+
+  listElement.innerHTML = '';
+
+  const dataKittenFiltered = kittenDataList
+    .filter((kitten) => kitten.desc.includes(descrSearchText))
+    .filter((kitten) => kitten.race === raceSearchText);
+
+  renderKittenList(dataKittenFiltered);
+}
+
+/* SOLUCIÓN PAIR 22/09
+
+  function filterKitten(event) {
+  event.preventDefault();
+
+  const descrSearchText = input_search_desc.value;
+  const raceSearchText = input_search_race.value;
+
+  listElement.innerHTML = '';
+  const kittenListFiltered = kittenDataList
+    .filter((pepino) => {
+      if (pepino.desc.includes(descrSearchText)) {
+        listElement.innerHTML += renderKitten(pepino);
+      }
+    })
+    .filter((pepino) => {
+      if (pepino.race.includes(raceSearchText)) {
+        listElement.innerHTML += renderKitten(pepino);
+      }
+    });
+
+    renderKittenList(kittenListFiltered); Si se deja comentado, deja filtrar por descripción. La de raza no funciona. Si se descomenta, no funciona nada y al buscar por desc desaparecen los gatitos :'(
+   */
 
 //Mostrar/ocultar el formulario
 function showNewCatForm() {
@@ -123,49 +168,7 @@ function cancelNewKitten(event) {
   inputName.value = '';
 }
 
-//Filtrar por descripción
-
-// function filterKitten(ev) {
-//   ev.preventDefault();
-//   listElement.innerHTML = '';
-
-//   const descrSearchText = input_search_desc.value;
-
-//   function findKitten(pepino) {
-//     if (pepino.desc.includes(descrSearchText)) {
-//       listElement.innerHTML += renderKitten(pepino);
-//     }
-//   }
-//   const kittenListFiltered = kittenDataList.filter(findKitten);
-// }
-
-function filterKitten(ev) {
-  ev.preventDefault();
-  listElement.innerHTML = '';
-
-  const descrSearchText = input_search_desc.value;
-  const raceSearchText = input_search_race.value;
-
-  const kittenListFiltered = kittenDataList
-    .filter((pepino) => {
-      if (pepino.desc.includes(descrSearchText)) {
-        listElement.innerHTML += renderKitten(pepino);
-      }
-    })
-    .filter((pepino) => {
-      if (pepino.race.includes(raceSearchText)) {
-        listElement.innerHTML += renderKitten(pepino);
-      }
-    });
-
-  renderKittenList(kittenListFiltered);
-}
-
-//   const filteredData = data
-//   .filter((eachData) => eachData.name.toLowerCase().includes('s'))
-//   .filter((eachData) => eachData.city === 'Madrid');
-
-//Mostrar el litado de gatitos en ell HTML
+//Mostrar el litado de gatitos en el HTML
 renderKittenList(kittenDataList);
 
 //Eventos
