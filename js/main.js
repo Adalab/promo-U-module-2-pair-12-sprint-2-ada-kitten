@@ -72,11 +72,32 @@ function renderKittenList(kittenDataList) {
   }
 }
 
+//SOLUCIÓN CHATGPT: SI FUNCIONA
+
+function filterKitten(event) {
+  event.preventDefault();
+
+  const descrSearchText = input_search_desc.value.toLowerCase(); // Convertir a minúsculas para comparación
+  const raceSearchText = input_search_race.value;
+
+  listElement.innerHTML = '';
+
+  const dataKittenFiltered = kittenDataList.filter((kitten) => {
+    const description = kitten.desc.toLowerCase(); // Convertir a minúsculas para comparación
+    return (
+      description.includes(descrSearchText) &&
+      (raceSearchText === '' || kitten.race === raceSearchText)
+    );
+  });
+
+  renderKittenList(dataKittenFiltered);
+}
+
 /*SOLUCION YANELIS--- 
 funciona la raza pero no la descripción
 
 https://github.com/Adalab/pw-adakitten/blob/main/02-solucion-sprint-2/js/exercise-per-day-to-review/main-1-12-metodos-funcionales.js
-*/
+
 
 function filterKitten(event) {
   event.preventDefault();
@@ -92,6 +113,7 @@ function filterKitten(event) {
 
   renderKittenList(dataKittenFiltered);
 }
+*/
 
 /* SOLUCIÓN PAIR 22/09
 
