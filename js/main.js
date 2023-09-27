@@ -17,26 +17,6 @@ const input_search_desc = document.querySelector('.js_in_search_desc');
 
 const input_search_race = document.querySelector('.js_in_search_race');
 
-//Objetos con cada gatito
-// const kittenData_1 = {
-//   image: 'https://dev.adalab.es/gato-siames.webp',
-//   name: 'Anastacio',
-//   desc: 'Porte elegante, su patrón de color tan característico y sus ojos de un azul intenso, pero su historia se remonta a Asía al menos hace 500 años, donde tuvo su origen muy posiblemente.',
-//   race: 'Siamés',
-// };
-// const kittenData_2 = {
-//   image: 'https://dev.adalab.es/sphynx-gato.webp',
-//   name: 'Fiona',
-//   desc: 'Produce fascinación y curiosidad. Exótico, raro, bello, extraño… hasta con pinta de alienígena han llegado a definir a esta raza gatuna que se caracteriza por la «ausencia» de pelo.',
-//   race: 'Sphynx',
-// };
-// const kittenData_3 = {
-//   image: 'https://dev.adalab.es/maine-coon-cat.webp',
-//   name: 'Sofia',
-//   desc: ' Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.',
-//   race: 'Maine Coon',
-// };
-
 const GITHUB_USER = 'ysabelvalencia';
 const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;
 
@@ -64,23 +44,15 @@ function getDataApi() {
 }
 getDataApi();
 
-////////////////////
+///////////////////
 
-function renderKittenList(kittenDataList) {
-  listElement.innerHTML = '';
-  for (const kittenItem of kittenDataList) {
-    listElement.innerHTML += renderKitten(kittenItem);
-  }
-}
-
-//Funciones
 function renderKitten(kittenData) {
-  let html = '';
-  if (kittenData.race === '') {
-    html = `Uy que despiste, no sabemos su raza`;
-  } else {
-    html = kittenData.race;
-  }
+  // let html = '';
+  // if (kittenData.race === '') {
+  //   html = `Uy que despiste, no sabemos su raza`;
+  // } else {
+  //   html = kittenData.race;
+  // }
 
   const kitten = `<li class="card">
     <article>
@@ -90,14 +62,78 @@ function renderKitten(kittenData) {
         alt="gatito"
       />
       <h3 class="card_title">${kittenData.name}</h3>
-      <h3 class="card_race">${html}</h3>
+      <h3 class="card_race">${kittenData.race}</h3>
       <p class="card_description">
       ${kittenData.desc}
       </p>
     </article>
     </li>`;
-  return kitten;
+
+  const liElement = document.createElement('li');
+  listElement.setAttribute('class', 'card');
+
+  const articleElement = document.createElement('article');
+  liElement.appendChild(articleElement);
+
+  const imgElement = document.createElement('img');
+  articleElement.appendChild(imgElement);
+  imgElement.setAttribute('class', 'card_img');
+  imgElement.setAttribute('src', 'kittenData.url');
+  imgElement.setAttribute('alt', 'gatito');
+
+  const h3nElement = document.createElement('h3');
+  const textH3n = document.createTextNode(kittenData.name);
+  h3nElement.appendChild(textH3n);
+  articleElement.appendChild(h3nElement);
+  h3nElement.setAttribute('class', 'card_title');
+
+  const h3rElement = document.createElement('h3');
+  const textH3r = document.createTextNode(html);
+  h3rElement.appendChild(textH3r);
+  articleElement.appendChild(h3rElement);
+  h3rElement.setAttribute('class', 'card_race');
+
+  const pElement = document.createElement('p');
+  articleElement.appendChild(pElement);
+  pElement.textContent = kittenData.desc;
+
+  return liElement;
 }
+
+function renderKittenList(kittenDataList) {
+  listElement.innerHTML = '';
+  for (const kittenItem of kittenDataList) {
+    const newLiItem = renderKitten(kittenItem);
+    listElement.appendChild(newLiItem);
+  }
+}
+
+//img
+
+//Funciones
+/*function renderKitten(kittenData) {
+  let html = '';
+  if (kittenData.race === '') {
+    html = `Uy que despiste, no sabemos su raza`;
+  } else {
+    html = kittenData.race;
+  }
+  const kitten = `<li class="card">
+    <article>
+      <img
+        class="card_img"
+        src=${}
+        alt="gatito"
+      />
+      <h3 class="card_title">${}</h3>
+      <h3 class="card_race">${html}</h3>
+      <p class="card_description">
+      ${}
+      </p>
+    </article>
+    </li>`;
+  return kitten;
+}*/
 
 function filterKitten(event) {
   event.preventDefault();
